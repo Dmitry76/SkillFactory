@@ -41,7 +41,7 @@ def show_paper():
     a = '\n    0   1   2   \n  -------------\n0 | '
     a += paper['00'] + ' | ' + paper['01'] + ' | ' + paper['02'] + ' | \n  -------------\n1 | '
     a += paper['10'] + ' | ' + paper['11'] + ' | ' + paper['12'] + ' | \n  -------------\n2 | '
-    a += paper['20'] + ' | ' + paper['21'] + ' | ' + paper['22'] + ' | \n  -------------\n'
+    a += paper['20'] + ' | ' + paper['21'] + ' | ' + paper['22'] + ' | \n  -------------'
     return a
 
 
@@ -68,9 +68,9 @@ gamer_symbol = str(input('Чем будете играть? '))
 if gamer_symbol == 'X' or gamer_symbol == 'x' or gamer_symbol == 'Х' or gamer_symbol == 'х':
     gamer = ['X']
     comp = ['O']
-    print('Вы выбрали "X", делайте первый ход!\n')
+    print('Вы выбрали "X", делайте первый ход!')
 else:
-    print('Вы не выбрали "X", первый ход за мной!\n')
+    print('Вы не выбрали "X", первый ход за мной!')
     gamer = ['O']
     comp = ['X', '11']
     paper['11'] = 'X'
@@ -78,26 +78,35 @@ else:
 while game_status == 'start':
     print(show_paper())  # ВЫВОД ИГРОВОГО ПОЛЯ В КОНСОЛЬ
 
-    print('Введите координаты Вашего хода в формате: XY\n(X - номер строки, Y - номер столбца)')
-    gamer_action = str(input('Ваш ход: '))
-    comp_action = '0'  # ХОД КОМПЬЮТЕРА НЕ СДЕЛАН
+    # ПРОВЕРКА НАЛИЧИЯ СВОБОДНЫХ ЯЧЕЕК И ЗАПРОС ХОДА ПРИ НАЛИЧИИ
+    for x in paper:
+        if paper[x] == '-':
+            print('============================================='
+                  '\nВведите координаты Вашего хода в формате: XY'
+                  '\n(X - номер строки, Y - номер столбца)'
+                  '\n=============================================')
+            gamer_action = str(input('Ваш ход: '))
+            comp_action = '0'  # ХОД КОМПЬЮТЕРА НЕ СДЕЛАН
 
-    # ПРОВЕРКА ЗАНЯТО ЛИ МЕСТО КОМПЬЮТЕРОМ
-    for x in comp:
-        if x == gamer_action:
-            print('Это место занято!')
-            gamer_action = '99'
-            break
-    paper[gamer_action] = gamer[0]
+            # ПРОВЕРКА ЗАНЯТО ЛИ МЕСТО КОМПЬЮТЕРОМ
+            for x in comp:
+                if x == gamer_action:
+                    print('Это место занято!')
+                    gamer_action = '99'
+                    break
+            paper[gamer_action] = gamer[0]
 
-    # ПРОВЕРКА ЗАНЯТО ЛИ МЕСТО ИГРОКОМ
-    for x in gamer:
-        if x == gamer_action and gamer_action != '99':
-            print('Это место занято!')
-            gamer_action = '99'
+            # ПРОВЕРКА ЗАНЯТО ЛИ МЕСТО ИГРОКОМ
+            for x in gamer:
+                if x == gamer_action and gamer_action != '99':
+                    print('Это место занято!')
+                    gamer_action = '99'
+                    break
+            paper[gamer_action] = gamer[0]
+            gamer.append(gamer_action)
             break
-    paper[gamer_action] = gamer[0]
-    gamer.append(gamer_action)
+    gamer_action = '77'
+    comp_action = '0'   # ХОД КОМПЬЮТЕРА НЕ СДЕЛАН
     # ПРОВЕРКА ОКОНЧАНИЯ ИГРЫ==================================
 
     result = result_scan()  # СКАНИРОВАНИЕ ВЫИГРЫШНЫХ КОМБИНАЦИЙ
