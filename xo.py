@@ -89,16 +89,16 @@ while game_status == 'start':
             comp_action = '0'  # ХОД КОМПЬЮТЕРА НЕ СДЕЛАН
 
             # ПРОВЕРКА ЗАНЯТО ЛИ МЕСТО КОМПЬЮТЕРОМ
-            for x in comp:
-                if x == gamer_action:
+            for xx in comp:
+                if xx == gamer_action:
                     print('Это место занято!')
                     gamer_action = '99'
                     break
             paper[gamer_action] = gamer[0]
 
             # ПРОВЕРКА ЗАНЯТО ЛИ МЕСТО ИГРОКОМ
-            for x in gamer:
-                if x == gamer_action and gamer_action != '99':
+            for xx in gamer:
+                if xx == gamer_action and gamer_action != '99':
                     print('Это место занято!')
                     gamer_action = '99'
                     break
