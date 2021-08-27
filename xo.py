@@ -35,6 +35,8 @@ second_action = {'11': ['01', '02'], '12': ['00', '02'], '13': ['00', '01'],  # 
 
 # ==ВЕРСТКА ИГРОВОГО ПОЛЯ ДЛЯ ВЫВОДА В КОНСОЛЬ
 def show_paper():
+    """Функция выводит в консоль игровое поле
+    в соответствии с текущим расположением X, O и пустых мест"""
     global paper
     a = '\n    0   1   2   \n  -------------\n0 | '
     a += paper['00'] + ' | ' + paper['01'] + ' | ' + paper['02'] + ' | \n  -------------\n1 | '
@@ -45,6 +47,7 @@ def show_paper():
 
 # ==СКАНИРОВАНИЕ ВЫИГРЫШНЫХ КОМБИНАЦИЙ
 def result_scan():
+    """Функция проверяет расположение Х и O на наличие выигрышных комбинаций"""
     global paper
     rs = [str(paper['00'] + paper['01'] + paper['02']),
           str(paper['10'] + paper['11'] + paper['12']),
@@ -75,11 +78,8 @@ else:
 while game_status == 'start':
     print(show_paper())  # ВЫВОД ИГРОВОГО ПОЛЯ В КОНСОЛЬ
 
-    print('Введите координаты Вашего хода в виде двухзначного числа в формате: VG (V-вертикаль, G-горизонталь)')
-    print('ВНИМАНИЕ! НЕВЕРНЫЕ КООРДИНАТЫ = ПРОПУСК ХОДА!!!')
+    print('Введите координаты Вашего хода в формате: XY\n(X - номер строки, Y - номер столбца)')
     gamer_action = str(input('Ваш ход: '))
-    gamer.append(gamer_action)
-
     comp_action = '0'  # ХОД КОМПЬЮТЕРА НЕ СДЕЛАН
 
     # ПРОВЕРКА ЗАНЯТО ЛИ МЕСТО КОМПЬЮТЕРОМ
@@ -87,9 +87,17 @@ while game_status == 'start':
         if x == gamer_action:
             print('Это место занято!')
             gamer_action = '99'
-            gamer[(len(gamer) - 1)] = '99'
+            break
     paper[gamer_action] = gamer[0]
 
+    # ПРОВЕРКА ЗАНЯТО ЛИ МЕСТО ИГРОКОМ
+    for x in gamer:
+        if x == gamer_action and gamer_action != '99':
+            print('Это место занято!')
+            gamer_action = '99'
+            break
+    paper[gamer_action] = gamer[0]
+    gamer.append(gamer_action)
     # ПРОВЕРКА ОКОНЧАНИЯ ИГРЫ==================================
 
     result = result_scan()  # СКАНИРОВАНИЕ ВЫИГРЫШНЫХ КОМБИНАЦИЙ
@@ -106,8 +114,7 @@ while game_status == 'start':
 
     # ГЕНЕРАТОР ХОДА КОМПЬЮТЕРА
     # 1. ПРОВЕРКА СТАТУСА ИГРЫ (game_status == 'start')
-
-    if game_status == 'start':
+    if game_status == 'start' and gamer_action != '99':
         # 2. Если не занято место в центре (11), занимаем
         if result[1][1] == '-':
             comp.append('11')
