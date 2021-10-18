@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-football = pd.read_csv("z:\data_sf.csv")
+football = pd.read_csv("c:\ОБМЕН\data_sf.csv")
 
 print(football[football.Age > 35].Wage) # выводим колонку Wage записей, где Age больше 20
 print(football[football.Age > football.Age.mean()])  # записи таблицы, где Age выше среднего
