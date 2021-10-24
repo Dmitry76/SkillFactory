@@ -116,7 +116,7 @@ def query_execute(host, user, password, database, my_query):
 # СТАРТУЕМ, ВВОД ХОСТА И ИМЯ БД
 host_adr = input("Host: ")
 host_user = input("Пользователь: ")
-host_pass = getpass.getpass("pass: ")
+host_pass = getpass.getpass("Пароль: ")
 if show_databases(host_adr, host_user, host_pass):
     bd_name = input("Имя БД: ")
 else:
