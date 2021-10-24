@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-import pandas as pd
+import panda as pd
 football = pd.read_csv("~/PycharmProjects/data_sf.csv")
 
 print(football[football.Age > 35].Wage) # выводим колонку Wage записей, где Age больше 20
