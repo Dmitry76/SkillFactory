@@ -1,5 +1,10 @@
-# ДЛЯ ЧИСЛОВЫХ ЗНАЧЕНИЙ
-import panda as pd
-football = pd.read_csv("c:\ОБМЕН\data_sf.csv")
-with pd.option_context('display.max_rows', None, 'display.max_columns', None):
-    print(football[football.Age>35][["Name", "Age", "Club", "Wage"]].describe())
+import pandas as pd
+import matplotlib.pyplot as plt
+s = pd.Series([1,2,3,4,3,2,10,6])
+df = pd.DataFrame([[1,2,3,4,5],[2,4,6,4,2]])
+s.plot()
+plt.show()
+
+print(df)
+df.plot()
+plt.show()
