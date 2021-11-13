@@ -25,7 +25,7 @@ def send_mail(receiver, subject, message, at_file):
         msg["From"] = "007"
         msg.attach(MIMEText(content))
 
-        if at_file == "":  # ЕСЛИ ПУТЬ К ВЛОЖЕНИЮ НЕ ПУСТОЙ, ТО ПРИКРЕПЛЯЕМ
+        if at_file == "0":  # ЕСЛИ ПУТЬ К ВЛОЖЕНИЮ НЕ ПУСТОЙ, ТО ПРИКРЕПЛЯЕМ
             pass
         else:
             with open(f"C:\\Users\\Asus\\PycharmProjects\\SkillFactory\\SkillFactory\\mail\\{at_file}") as f:
@@ -46,6 +46,8 @@ def main():
     subject = input("Тема: ")
     message = input("Сообщение: ")
     at_file = input("Вложение: ")
+    if at_file == "":
+        at_file = "0"
     print(send_mail(receiver=receiver, subject=subject, message=message, at_file=at_file))
 
 
