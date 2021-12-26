@@ -12,7 +12,7 @@ def send_mail(receiver, subject, message, at_file):
     server.starttls()
 
     try:
-        with open(f"C:\\Users\\Asus\\PycharmProjects\\SkillFactory\\SkillFactory\\mail\\{message}") as file:
+        with open(message) as file:
             content = file.read()
     except IOError:
         return "Ошибка обращения к файлу!"
@@ -28,7 +28,7 @@ def send_mail(receiver, subject, message, at_file):
         if at_file == "0":  # ЕСЛИ ПУТЬ К ВЛОЖЕНИЮ НЕ ПУСТОЙ, ТО ПРИКРЕПЛЯЕМ
             pass
         else:
-            with open(f"C:\\Users\\Asus\\PycharmProjects\\SkillFactory\\SkillFactory\\mail\\{at_file}") as f:
+            with open(at_file) as f:
                 attach_file = MIMEText(f.read())
                 attach_file.add_header('content-disposition', 'attachment', filename=at_file)
                 msg.attach(attach_file)
