@@ -25,7 +25,7 @@ def graph_daily_statistic(start):
     if start == 1:
         plt.title('Статистика заполнения таблицы')
         print(stat_table)
-        days = stat_table['date'].dt.strftime('%d-%m')  # Меняем формат вывода даты
+        days = stat_table['date'].dt.strftime('%d-%m')  # Меняем формат вывода даты ('%d-%m-%y')
         records = stat_table['kol']
         plt.plot(days, records)
     else:
